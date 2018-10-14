@@ -1,0 +1,5 @@
+UUID:
+    Friends:
+        - UUID
+    Requests:
+        UUID: sent

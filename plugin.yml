@@ -1,0 +1,10 @@
+name: PixelFriends
+version: 1.0
+main: me.ryandw11.pixelfriends.PixelFriends
+author: Ryandw11
+description: A friend plugin!
+api-version: 1.13
+commands:
+    friend:
+     description: Access the friend gui.
+     aliases: [f, pf, pixelfriend, friends]
