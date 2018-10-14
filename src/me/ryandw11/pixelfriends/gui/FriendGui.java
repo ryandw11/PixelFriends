@@ -155,6 +155,23 @@ public class FriendGui implements Listener {
 	        		p.sendMessage(ChatColor.RED + "That player has requests disabled!");
 	        		return null;
 	        	}
+	        	if(sm.getMaxRequests() != -1)
+	        		if(dm.getRequestsNumber(Bukkit.getOfflinePlayer(reply).getUniqueId()) >= sm.getMaxRequests()) {
+	        			p.sendMessage(ChatColor.RED + "That person has too many open friend requests!");
+	        			return null;
+	        		}
+	        	
+	        	if(sm.getMaxFriend() != -1)
+	        		if(dm.numberOfFriends(Bukkit.getOfflinePlayer(reply).getUniqueId()) >= sm.getMaxFriend()) {
+	        			p.sendMessage(ChatColor.RED + "That person has too many friends!");
+	        			return null;
+	        		}
+	        	
+	        	if(sm.getMaxFriend() != -1)
+	        		if(dm.numberOfFriends(p.getUniqueId()) >= sm.getMaxFriend()) {
+	        			p.sendMessage(ChatColor.RED + "You have too many friends!");
+	        			return null;
+	        		}
 	        	
 	        	if(dm.hasFriend(p.getUniqueId(), Bukkit.getOfflinePlayer(reply).getUniqueId())) {
 	        		p.sendMessage(ChatColor.RED + "You are already friends with that person!");

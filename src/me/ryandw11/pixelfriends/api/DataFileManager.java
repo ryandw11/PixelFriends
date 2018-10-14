@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import me.ryandw11.pixelfriends.PixelFriends;
@@ -59,6 +61,34 @@ public class DataFileManager {
 		}
 		return ls;
 	}
+	/**
+	 * Get all of the requests.
+	 * @param p The player that holds the requests
+	 * @return A list of said requests.
+	 */
+	public List<FriendRequest> getRequests(OfflinePlayer p) {
+		List<FriendRequest> ls = new ArrayList<>();
+		if(!plugin.data.contains(p.getUniqueId() + ".Requests")) {
+			return ls;
+		}
+		for(String sel : plugin.data.getConfigurationSection(p.getUniqueId() + ".Requests").getKeys(false)) {
+			if(plugin.data.getString(p.getUniqueId() + ".Requests." + sel).equals(RequestStatus.Sent.toString())) {
+				ls.add(new FriendRequest(p.getUniqueId(), UUID.fromString(sel)));
+			}else {
+				ls.add(new FriendRequest(UUID.fromString(sel), p.getUniqueId()));
+			}
+		}
+		return ls;
+	}
+	/**
+	 * Get the number of requests a player has.
+	 * @param uuid
+	 * @return the number
+	 */
+	public int getRequestsNumber(UUID uuid) {
+		return getRequests(Bukkit.getOfflinePlayer(uuid)).size();
+	}
+	
 	/**
 	 * Get all of the request a player has recieved
 	 * @param p
@@ -151,5 +181,14 @@ public class DataFileManager {
 		if(plugin.data.getStringList(person + ".Friends").contains(friend.toString()))
 			return true;
 		return false;
+	}
+	
+	/**
+	 * Get the number of friends a player has.
+	 * @param uuid
+	 * @return
+	 */
+	public int numberOfFriends(UUID uuid) {
+		return plugin.data.getStringList(uuid + "Friends").size();
 	}
 }

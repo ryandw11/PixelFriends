@@ -4,11 +4,6 @@ import me.ryandw11.pixelfriends.PixelFriends;
 
 public class PixelFriendsAPI {
 	
-	private PixelFriends plugin;
-	public PixelFriendsAPI() {
-		this.plugin = PixelFriends.plugin;
-	}
-	
 	/**
 	 * Add a componenet to the plugin.
 	 * @param ca A reference to your class

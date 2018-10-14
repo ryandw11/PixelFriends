@@ -87,6 +87,21 @@ public class ConfirmFriendship implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		OfflinePlayer op = ((SkullMeta) e.getInventory().getItem(4).getItemMeta()).getOwningPlayer();
 		if(item.equals(confirm())) {
+			
+			if(sm.getMaxFriend() != -1)
+				if(dm.numberOfFriends(p.getUniqueId()) >= sm.getMaxFriend()) {
+					p.sendMessage(ChatColor.RED + "You have too many friends!");
+					p.closeInventory();
+					return;
+				}
+			
+			if(sm.getMaxFriend() != -1)
+				if(dm.numberOfFriends(op.getUniqueId()) >= sm.getMaxFriend()) {
+					p.sendMessage(ChatColor.RED + "They have too many friends!");
+					p.closeInventory();
+					return;
+				}
+			
 			dm.removeRequest(op.getUniqueId(), p.getUniqueId());
 			dm.addFriend(op.getUniqueId(), p.getUniqueId());
 			
