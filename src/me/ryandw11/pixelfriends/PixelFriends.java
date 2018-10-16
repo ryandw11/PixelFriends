@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.ryandw11.pixelfriends.api.ComponentAddon;
+import me.ryandw11.pixelfriends.api.PixelFriendsAPI;
 import me.ryandw11.pixelfriends.commands.FriendCommand;
 import me.ryandw11.pixelfriends.gui.ConfirmFriendship;
 import me.ryandw11.pixelfriends.gui.ConfirmRequest;
@@ -35,7 +36,7 @@ public class PixelFriends extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		registerConfig();
-		getCommand("friend").setExecutor(new FriendCommand());
+		getCommand("friend").setExecutor(new FriendCommand(this));
 		Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new FriendGui(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ConfirmRequest(), this);
@@ -44,6 +45,9 @@ public class PixelFriends extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new Friend(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new SettingsGui(), this);
 		loadFile();
+		
+		PixelFriendsAPI pfapi = new PixelFriendsAPI();
+		pfapi.disableTeleport(!getConfig().getBoolean("teleport"));
 	}
 	
 	@Override

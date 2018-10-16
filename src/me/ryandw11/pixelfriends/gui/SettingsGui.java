@@ -6,7 +6,6 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,18 +16,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.ryandw11.pixelfriends.PixelFriends;
 import me.ryandw11.pixelfriends.SettingsManager;
-import me.ryandw11.pixelfriends.api.DataFileManager;
 import me.ryandw11.pixelfriends.headlib.HeadLib;
 
 public class SettingsGui implements Listener {
 	private PixelFriends plugin;
 	private SettingsManager sm;
-	private DataFileManager dm;
 	
 	public SettingsGui() {
 		this.plugin = PixelFriends.plugin;
 		sm = new SettingsManager(plugin);
-		dm = new DataFileManager(plugin);
 	}
 	
 	public void openConfirmGui(Player p) {
@@ -37,9 +33,6 @@ public class SettingsGui implements Listener {
 		ItemStack filler = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 		ItemMeta fillerm = filler.getItemMeta();
 		fillerm.setDisplayName(" ");
-		List<String> lore = new ArrayList<>();
-		lore.add(sm.getNameTwo());
-		fillerm.setLore(lore);
 		filler.setItemMeta(fillerm);
 		
 		inv.setItem(0, filler);

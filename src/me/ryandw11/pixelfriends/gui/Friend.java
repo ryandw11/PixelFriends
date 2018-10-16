@@ -42,7 +42,6 @@ public class Friend implements Listener {
 		ItemMeta fillerm = filler.getItemMeta();
 		fillerm.setDisplayName(" ");
 		List<String> lore = new ArrayList<>();
-		lore.add(sm.getNameTwo());
 		fillerm.setLore(lore);
 		filler.setItemMeta(fillerm);
 		
@@ -52,7 +51,6 @@ public class Friend implements Listener {
 		reqM.setDisplayName(ChatColor.GOLD + input.getName());
 		lore.clear();
 		lore.add(ChatColor.LIGHT_PURPLE + "Your Friend.");
-		lore.add(sm.getNameTwo());
 		reqM.setLore(lore);
 		reqSkull.setItemMeta(reqM);
 		
@@ -75,7 +73,6 @@ public class Friend implements Listener {
 		if(lores == null)
 			lores = new ArrayList<String>();
 		lores.add(sm.getNameTwo());
-		itM.setLore(lores);
 		it.setItemMeta(itM);
 		
 		inv.setItem(0, reqSkull);
@@ -109,8 +106,9 @@ public class Friend implements Listener {
 		 *	The compoenent area. 
 		 */
 		
-		if(!item.getItemMeta().getLore().get(item.getItemMeta().getLore().size() - 1).equals(sm.getNameTwo()))
+		if(!e.getInventory().contains(item))
 			return;
+		
 		Player p = (Player) e.getWhoClicked();
 		SkullMeta im = (SkullMeta) e.getInventory().getItem(0).getItemMeta();
 		OfflinePlayer op = im.getOwningPlayer();
@@ -121,7 +119,8 @@ public class Friend implements Listener {
 		}
 		else {
 			for(ComponentAddon ca : PixelFriends.ca) {
-				
+				if(!ca.checkConditions(p, op))
+					continue; //If the conditions are not true.
 				ItemStack it = ca.customItem(p, op);
 				ItemMeta itM = it.getItemMeta();
 				List<String> lores = itM.getLore();
@@ -141,7 +140,6 @@ public class Friend implements Listener {
 			List<String> lores = itM.getLore();
 			if(lores == null)
 				lores = new ArrayList<String>();
-			lores.add(sm.getNameTwo());
 			itM.setLore(lores);
 			it.setItemMeta(itM);
 			if(item.equals(it)) {
@@ -152,6 +150,6 @@ public class Friend implements Listener {
 	}
 	
 	public ItemStack back() {
-		return HeadLib.WOODEN_ARROW_LEFT.toItemStack(1, ChatColor.RED + "Back", "Go Back", sm.getNameTwo());
+		return HeadLib.WOODEN_ARROW_LEFT.toItemStack(1, ChatColor.RED + "Back", "Go Back");
 	}
 }

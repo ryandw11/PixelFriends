@@ -53,5 +53,17 @@ public class SettingsManager {
 		if(!plugin.data.contains(s + "requests"))
 			plugin.data.set(s + "requests", true);
 	}
+	
+	/*
+	 * Config file settings.
+	 */
+	
+	public int getMaxFriend() {
+		return plugin.getConfig().getInt("MaxFriends");
+	}
+	
+	public int getMaxRequests() {
+		return plugin.getConfig().getInt("MaxRequests");
+	}
 
 }

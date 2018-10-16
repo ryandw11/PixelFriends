@@ -1,4 +1,23 @@
-DateFormat: 'MMM/dd/yyyy - HH:mm'
-
 SettingsName1: 'PixelFriends'
 SettingsName2: 'PixelFriend'
+###################################################
+#                  Pixel Friends                  #
+###################################################
+
+#Set the date format (Note: uses system time, not player time)
+###############[Table of date formts]##############
+# LLLL dd, yyyy at hh:mm aa || October 25, 2018 at 11:25 PM (Default)
+# MM/dd/yy || 10/25/18
+# dd/MM/yy || 25/10/18
+# LLLL dd, yyyy at HH:mm || October 25, 2018 at 23:25
+###################################################
+DateFormat: 'LLLL dd, yyyy at hh:mm aa'
+
+#The maximum amount of requests a player can have. -1 means no limit.
+MaxRequests: -1
+
+#The maximum amount of friends a player can have. -1 means no limit.
+MaxFriends: -1
+
+#If players have the ability to teleport to online friends.
+teleport: true
